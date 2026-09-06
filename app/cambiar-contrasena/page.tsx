@@ -1,0 +1,4 @@
+import Link from "next/link";import ChangePasswordForm from "../../components/ChangePasswordForm";
+import {requireRole} from "../../lib/auth";
+export const metadata={title:"Cambia tu contraseña | PideTaxiCalatayud"};
+export default async function ChangePasswordPage(){await requireRole(["DRIVER"],{allowPasswordChange:true});return <main className="form-page"><header className="shell compact-header"><Link className="brand" href="/"><span className="brand-mark">PT</span><span>PideTaxi<span>Calatayud</span></span></Link><span>Primer acceso</span></header><section className="form-shell"><span className="eyebrow">Protege tu cuenta</span><h1>Crea tu contraseña</h1><p>La clave recibida por email es temporal. Debes sustituirla antes de entrar en la aplicación de taxistas.</p><ChangePasswordForm/></section></main>}

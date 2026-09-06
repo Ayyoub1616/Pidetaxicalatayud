@@ -1,0 +1,5 @@
+import {sha256} from "./supabase-server";
+function bytesToBase64(bytes:Uint8Array){let binary="";for(const byte of bytes)binary+=String.fromCharCode(byte);return btoa(binary)}
+export async function encryptSensitive(value:string){const raw=process.env.REGISTRATION_ENCRYPTION_KEY;if(!raw)throw new Error("REGISTRATION_ENCRYPTION_KEY_NOT_CONFIGURED");const keyBytes=Uint8Array.from(atob(raw),c=>c.charCodeAt(0));if(keyBytes.length!==32)throw new Error("REGISTRATION_ENCRYPTION_KEY_MUST_BE_32_BYTES");const key=await crypto.subtle.importKey("raw",keyBytes,"AES-GCM",false,["encrypt"]),iv=crypto.getRandomValues(new Uint8Array(12)),encrypted=await crypto.subtle.encrypt({name:"AES-GCM",iv},key,new TextEncoder().encode(value));return `${bytesToBase64(iv)}.${bytesToBase64(new Uint8Array(encrypted))}`}
+export async function identifierHash(value:string){return sha256(`${process.env.IP_HASH_SALT||""}:${value.trim().toUpperCase()}`)}
+export function maskDni(value:string){return `•••••${value.slice(-4)}`}

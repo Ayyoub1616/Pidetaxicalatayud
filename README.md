@@ -39,7 +39,7 @@ Las migraciones crean ciudades, perfiles, taxistas, dispositivos, push, guardias
 
 ## Variables de entorno
 
-Todas figuran en `.env.example`. Son imprescindibles para producción: Site URL, tres variables de Supabase, par VAPID, Resend, Turnstile, `CRON_SECRET` e `IP_HASH_SALT`. Mantén `PHONE_OTP_ENABLED=false` hasta contratar un proveedor SMS.
+Todas figuran en `.env.example`. Son imprescindibles para producción: Site URL, tres variables de Supabase, par VAPID, Resend, Turnstile, `CRON_SECRET`, `IP_HASH_SALT` y `REGISTRATION_ENCRYPTION_KEY`. Genera esta última como 32 bytes en base64 (por ejemplo, `openssl rand -base64 32`) y guárdala únicamente como secreto de servidor. Mantén `PHONE_OTP_ENABLED=false` hasta contratar un proveedor SMS.
 
 ## VAPID, push y PWA
 
@@ -64,9 +64,9 @@ INITIAL_ADMIN_EMAIL=tu@email.es pnpm create-admin
 
 El script usa la API administrativa de Supabase, invita por email y crea el perfil ADMIN para Calatayud.
 
-## Primer taxista
+## Alta y primer acceso de taxistas
 
-Desde `/admin/taxistas`: alta, datos profesionales, vehículo y prioridad; envía la invitación. El taxista define contraseña, acepta condiciones, instala la PWA, permite push, recibe una prueba y elige estado. Suspender o dar de baja conserva históricos.
+El profesional envía su solicitud en `/alta-taxista` con datos personales, licencia y vehículo. El DNI/NIE se cifra antes de guardarse. Administración la revisa en `/admin/solicitudes-taxistas`; al aprobar se crea la cuenta y Resend envía el usuario y una contraseña temporal. En el primer inicio de sesión se redirige obligatoriamente a `/cambiar-contrasena`. Después puede instalar la PWA, permitir push y elegir estado. Suspender o dar de baja conserva históricos.
 
 ## Guardias y DispatchEngine
 
