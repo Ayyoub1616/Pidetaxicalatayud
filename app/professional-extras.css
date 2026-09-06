@@ -1,0 +1,2 @@
+.admin-heading-actions{display:flex;align-items:center;gap:18px}
+@media(max-width:600px){.admin-heading-actions{align-items:flex-start;flex-direction:column;gap:10px}}

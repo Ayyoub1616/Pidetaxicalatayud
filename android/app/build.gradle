@@ -1,0 +1,35 @@
+plugins { id 'com.android.application' }
+
+def serviceUrl = project.findProperty("APP_BASE_URL") ?: "https://ayyoub1616.github.io/Pidetaxicalatayud/"
+
+android {
+    namespace 'es.pidetaxicalatayud.app'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'es.pidetaxicalatayud'
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName '1.0.0'
+        buildConfigField 'String', 'BASE_URL', '"' + serviceUrl + '"'
+    }
+
+    flavorDimensions 'audience'
+    productFlavors {
+        client {
+            dimension 'audience'
+            applicationIdSuffix '.clientes'
+            manifestPlaceholders = [appLabel: 'PideTaxi Calatayud']
+            buildConfigField 'String', 'START_ROUTE', '"#inicio"'
+        }
+        driver {
+            dimension 'audience'
+            applicationIdSuffix '.taxistas'
+            manifestPlaceholders = [appLabel: 'PideTaxi Taxistas']
+            buildConfigField 'String', 'START_ROUTE', '"#taxista"'
+        }
+    }
+
+    buildFeatures { buildConfig true }
+}

@@ -48,6 +48,14 @@ Genera un par VAPID una sola vez y almacena la privada como secreto. Cada dispos
 - iPhone: abrir en Safari, Compartir → Añadir a pantalla de inicio, abrir la PWA y permitir notificaciones. Push web requiere una versión moderna de iOS y la app instalada.
 - Android: abrir en Chrome, menú → Instalar aplicación, abrirla y permitir notificaciones.
 
+## Aplicaciones Android
+
+`/descargar-app` ofrece la APK pública para clientes y la instalación PWA. La APK profesional se muestra únicamente en `/taxista/descargar`, detrás del control de acceso. En producción, `/api/downloads/driver-apk` valida el rol antes de entregar el archivo indicado por el secreto `DRIVER_APK_URL`.
+
+El proyecto Android está en `android/` y genera dos variantes: `client` y `driver`. Las versiones de prueba usan firma debug; antes de distribuirlas como definitivas hay que configurar una clave de firma privada, custodiarla fuera del repositorio y aumentar `versionCode`.
+
+La APK es un contenedor conectado al servicio web, por lo que recibe la interfaz actualizada sin reinstalarla. En producción debe compilarse con `APP_BASE_URL` apuntando al dominio definitivo.
+
 La guía está disponible en `/taxista/instalar`.
 
 ## Resend y Turnstile
@@ -83,6 +91,8 @@ Añade `pidetaxicalatayud.es` y `www.pidetaxicalatayud.es` al despliegue, aplica
 ## Prueba completa
 
 Con demo activada: abre `/pedir-taxi`, envía la solicitud y observa la aceptación simulada en su URL privada. En `/taxista`, pulsa “Simular nueva oferta”, acepta y recorre En camino → Llegada → Inicio → Final. En `/admin` revisa Control, taxistas y guardias. Para producción, repite con dos sesiones reales aceptando simultáneamente: solo una RPC debe ganar.
+
+El seguimiento del cliente usa un flujo SSE y la bandeja administrativa escucha cambios de Supabase Realtime. La interfaz muestra explícitamente si está conectada, en modo demo o sin conexión.
 
 ## Seguridad y aspectos legales
 
