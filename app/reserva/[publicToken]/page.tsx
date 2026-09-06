@@ -1,0 +1,2 @@
+import {Logo} from "../../../components/Logo";import BookingTracker from "../../../components/BookingTracker";
+export default async function BookingPage({params}:{params:Promise<{publicToken:string}>}){const {publicToken}=await params;return <main className="tracker-page"><header className="compact-header shell"><Logo/><span>Actualización en directo <b className="live-dot"/></span></header><section className="tracker-shell"><BookingTracker token={publicToken}/></section></main>}

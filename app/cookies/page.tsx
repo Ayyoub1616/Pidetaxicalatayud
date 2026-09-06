@@ -1,0 +1,1 @@
+import LegalPage from "../../components/LegalPage";export default function Page(){return <LegalPage title="Política de cookies"><p>Inventariar antes del lanzamiento las cookies estrictamente necesarias, de autenticación, seguridad y, si se activan, analíticas. Configurar consentimiento para cualquier cookie no necesaria.</p></LegalPage>}

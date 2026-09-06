@@ -1,0 +1,1 @@
+import LegalPage from "../../components/LegalPage";export default function Page(){return <LegalPage title="Aviso legal"><h2>Datos del titular</h2><p>[NOMBRE O RAZÓN SOCIAL], [NIF/CIF], [DOMICILIO], [EMAIL DE CONTACTO].</p><h2>Finalidad</h2><p>Este sitio facilita la intermediación entre personas que solicitan un taxi y profesionales que pueden prestar el servicio.</p></LegalPage>}

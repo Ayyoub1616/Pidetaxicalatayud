@@ -1,0 +1,1 @@
+import AdminDashboard from "../../components/AdminDashboard";import {requireRole} from "../../lib/auth";export const metadata={title:"Control | PideTaxiCalatayud",robots:{index:false,follow:false}};export default async function AdminPage(){await requireRole(["ADMIN","CITY_ADMIN","SUPERADMIN"]);return <AdminDashboard/>}

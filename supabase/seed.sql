@@ -1,0 +1,4 @@
+insert into public.cities(name,province,country,timezone) values('Calatayud','Zaragoza','España','Europe/Madrid') on conflict do nothing;
+insert into public.app_settings(city_id) select id from public.cities where name='Calatayud' on conflict do nothing;
+insert into public.drivers(city_id,first_name,last_name,phone,email,license_number,vehicle_plate,vehicle_make,vehicle_model,vehicle_color,seats,is_accessible,dispatch_priority,availability_status)
+select c.id,'Taxi',n::text,'+3460000000'||n,'taxi'||n||'@example.invalid','DEMO-'||n,'000'||n||' DEMO','Toyota','Corolla','Blanco',case when n=5 then 6 else 4 end,n=5,n,case when n<=4 then 'available'::public.driver_availability else 'unavailable'::public.driver_availability end from public.cities c cross join generate_series(1,10) n where c.name='Calatayud' and not exists(select 1 from public.drivers where email='taxi'||n||'@example.invalid');

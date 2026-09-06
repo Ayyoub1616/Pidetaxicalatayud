@@ -1,0 +1,3 @@
+import {Suspense} from "react";import Link from "next/link";import BookingForm from "../../components/BookingForm";import {Logo} from "../../components/Logo";
+export const metadata={title:"Pedir taxi | PideTaxiCalatayud",description:"Solicita un taxi en Calatayud en menos de un minuto."};
+export default function RequestPage(){return <main className="form-page"><header className="compact-header shell"><Logo/><Link href="/">Cerrar</Link></header><section className="form-shell"><span className="section-kicker">Solicitud rápida</span><h1>¿Cuándo necesitas el taxi?</h1><p>Completa los datos. No necesitas registrarte.</p><Suspense><BookingForm/></Suspense></section></main>}

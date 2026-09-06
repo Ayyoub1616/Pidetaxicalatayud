@@ -1,0 +1,2 @@
+import {describe,expect,it} from "vitest";class AtomicBooking{winner:string|null=null;async accept(id:string){await Promise.resolve();if(this.winner)throw new Error("booking_already_taken");this.winner=id;return id}}
+describe("aceptación simultánea",()=>{it("produce exactamente un ganador",async()=>{const booking=new AtomicBooking();const results=await Promise.allSettled([booking.accept("A"),booking.accept("B")]);expect(results.filter(r=>r.status==="fulfilled")).toHaveLength(1);expect(results.filter(r=>r.status==="rejected")).toHaveLength(1)})});

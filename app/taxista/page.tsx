@@ -1,0 +1,1 @@
+import DriverApp from "../../components/DriverApp";import {requireRole} from "../../lib/auth";export const metadata={title:"App para taxistas | PideTaxiCalatayud",robots:{index:false,follow:false}};export default async function DriverPage(){await requireRole(["DRIVER","ADMIN","CITY_ADMIN","SUPERADMIN"]);return <DriverApp/>}
